@@ -47,6 +47,13 @@ var viewModel = function(){
 var infoWindow;
 var markers = [];
 
+// add click listener for a marker to open infowindow
+function markerListener(marker){
+  marker.addListener('click', function() {
+      populateInfoWindow(this);
+    });
+}
+
 function initMap() {
 
   map = new google.maps.Map(document.getElementById('map'), {
@@ -71,9 +78,7 @@ function initMap() {
 
       markers.push(marker);
 
-      marker.addListener('click', function() {
-        populateInfoWindow(this);
-      });
+      markerListener(marker);
 
       bounds.extend(marker.position);
 
