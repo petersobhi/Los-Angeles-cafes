@@ -24,7 +24,7 @@ var viewModel = function(){
     if (!filter) {
       markers.forEach(function(marker){
         marker.setVisible(true);
-      })
+      });
       return self.observablePlaces();
     } else {
       return ko.utils.arrayFilter(self.observablePlaces(), function(place) {
@@ -42,7 +42,7 @@ var viewModel = function(){
       });
     }
   });
-}
+};
 
 var infoWindow;
 var markers = [];
