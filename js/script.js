@@ -85,11 +85,6 @@ function initMap() {
   }
 
   map.fitBounds(bounds);
-
-
-   myMarker.addListener('click', function(){
-    infoWindow.open(map, myMarker);
-   });
  }
 
 function populateInfoWindow(marker) {
