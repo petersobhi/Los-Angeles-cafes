@@ -12,9 +12,12 @@ var places = [{id: 0, title: "Porto's Bakery & Cafe", position: {lat: 34.1504164
 var viewModel = function(){
   var self = this;
 
+  // places before filtering
   self.observablePlaces = ko.observableArray(places);
+
   self.searchQuery = ko.observable('');
 
+  // places after filtering
   self.filteredPlaces = ko.computed(function() {
     var filter = self.searchQuery().toLowerCase();
 
@@ -27,6 +30,11 @@ var viewModel = function(){
       return ko.utils.arrayFilter(self.observablePlaces(), function(place) {
         if (place.title.toLowerCase().indexOf(filter) !== 0){
           markers[place.id].setVisible(false);
+
+          //close info window if its place is not in the filtered list
+          if(markers[place.id] == infoWindow.marker){
+            infoWindow.close();
+          }
           return false;
         }
         markers[place.id].setVisible(true);
@@ -90,12 +98,14 @@ function populateInfoWindow(marker) {
 
   var fs_client_id = 'W4RQA3UHTX2EFLKW0V0TCFL1NGKXY5PLTSSA5BI2UDSBJG3Z';
   var fs_client_secret = 'M3CCTQI1GQVGFYE3MJH4UHXF2BE4TGKUGXRUZKGAKCAP1LI5';
+
   var fs_URL = 'https://api.foursquare.com/v2/venues/search?ll='+ marker.getPosition().lat() + ',' +
                 marker.getPosition().lng() + '&client_id=' + fs_client_id +
                '&client_secret=' + fs_client_secret + '&v=20160118'+
                '&query='+marker.title;
 
   var google_api_key = 'AIzaSyDISKH8FFEGapWMOGnOAaiJ-IyqvhXcOao';
+
   var image_url = 'https://maps.googleapis.com/maps/api/streetview?size=400x200&location=' + 
                    marker.getPosition().lat() +','+marker.getPosition().lng()+
                   '&heading=100&pitch=12&scale=2&key=' + google_api_key;
@@ -106,6 +116,8 @@ function populateInfoWindow(marker) {
                           foursquareData.website +'</p> <p>phone: '+ foursquareData.phone +'</p>' +
                           '<img src="'+ image_url +'" alt="street image">';
     infoWindow.setContent(infoWindowHTML);
+  }).fail(function(){
+    alert('Error in getting data for this place');
   });
 
   }
@@ -129,4 +141,8 @@ function FoursquareData(venue){
 function start(){
   ko.applyBindings(new viewModel());
   initMap();
+}
+
+function mapError(){
+  alert('Error in loading the map');
 }
