@@ -1,0 +1,31 @@
+#map {
+  height: 100%;
+}
+
+html, body {
+  height: 100%;
+}
+
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
+.search-box form{
+  padding: 0;
+}
+
+.search-box .input-group {
+  width: 100%;
+}
+
+.search-box .input-group-btn {
+  width: 0 !important;
+}
+
+.search-box .btn {
+  padding-top: 9px;
+  padding-bottom : 9px;
+}
+
+ul {list-style: none;}
