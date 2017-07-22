@@ -12,8 +12,8 @@ An app shows some cafes in Los Angeles written in Javascript using Google Maps A
 
 
 ### How to use it
-1- simply download the zip or clone https://github.com/petersobhi/Los-Angeles-cafes.git
-2- open index.html
+- simply download the zip or clone https://github.com/petersobhi/Los-Angeles-cafes.git
+- open index.html
 
 ##### or simply use it online: [Los Angeles cafes](https://petersobhi.github.io/Los-Angeles-cafes/)
 
