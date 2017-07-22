@@ -133,9 +133,9 @@ function populateInfoWindowById(id) {
 }
 
 function FoursquareData(venue){
-  this.phone = venue.contact.formattedPhone;
-  this.website = venue.url;
-  this.address = venue.location.formattedAddress.join();
+  this.phone = venue.contact.formattedPhone || 'not available';
+  this.website = venue.url || 'not available';
+  this.address = venue.location.formattedAddress.join() ;
 }
 
 function start(){
